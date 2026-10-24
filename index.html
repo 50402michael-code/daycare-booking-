@@ -1,432 +1,1020 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>六十三社區長照機構｜參訪預約</title>
+  <title>臺北市私立六十三社區長照機構｜參訪預約單</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts - Zen Maru Gothic & Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sakura: {
+              50: '#fff5f7',
+              100: '#fce7f3',
+              200: '#fbcfe8',
+              300: '#f9a8d4',
+              400: '#f472b6',
+              500: '#ec4899',
+              600: '#db2777',
+              700: '#be185d',
+              800: '#9d174d',
+            },
+            mint: {
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              500: '#22c55e',
+            },
+            vanilla: {
+              100: '#fef3c7',
+              200: '#fde68a',
+            },
+            lavender: {
+              100: '#f3e8ff',
+              200: '#e9d5ff',
+            }
+          },
+          fontFamily: {
+            sans: ['"Zen Maru Gothic"', '"Noto Sans TC"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    /* Kawaii Background with Floating Sparkles */
     body {
-      font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
-      background: #f8f1e7;
-      color: #5f5146;
-      line-height: 1.6;
+      background: radial-gradient(circle at 50% 10%, #fce7f3 0%, #fff5f7 50%, #fbcfe8 100%);
       min-height: 100vh;
-      padding: 20px 12px;
+      font-family: 'Zen Maru Gothic', 'Noto Sans TC', sans-serif;
     }
 
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
+    /* Floating Cloud/Bubble Soft Shadow */
+    .kawaii-card {
+      background: #ffffff;
+      border: 3px dashed #f472b6;
+      border-radius: 28px;
+      box-shadow: 0 15px 35px -5px rgba(244, 114, 182, 0.25);
     }
 
-    .header {
-      background: linear-gradient(135deg, #e8cfae, #d9b894);
+    /* Cute Button Bounce Effect */
+    .btn-bounce {
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-bounce:hover {
+      transform: scale(1.04) translateY(-2px);
+    }
+    .btn-bounce:active {
+      transform: scale(0.96) translateY(0);
+    }
+
+    /* Custom Scrollbar Kawaii Pink */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #fff5f7;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #f472b6;
       border-radius: 20px;
-      padding: 28px 24px;
-      text-align: center;
-      margin-bottom: 24px;
-      box-shadow: 0 4px 16px rgba(120, 90, 60, 0.12);
+      border: 2px solid #fff5f7;
+    }
+
+    /* Polaroid Modal Style */
+    .polaroid-card {
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(219, 39, 119, 0.2);
+      border: 2px solid #fbcfe8;
       position: relative;
     }
-
-    .header-logo {
+    .polaroid-tape {
       position: absolute;
-      top: 16px;
-      left: 16px;
-      width: 64px;
-      height: 64px;
-      border-radius: 12px;
-      object-fit: contain;
-      background: #fff;
-      padding: 4px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 120px;
+      height: 26px;
+      background: rgba(253, 230, 138, 0.85);
+      border: 1px dashed #f59e0b;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
     }
 
-    .header h1 {
-      color: #5a4636;
-      font-size: 28px;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
-      padding-left: 60px;
-      padding-right: 60px;
-    }
-
-    .header .subtitle {
-      color: #6b5544;
-      font-size: 16px;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-
-    .header p {
-      color: #7a6554;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .card {
-      background: #fffaf4;
-      border-radius: 18px;
-      padding: 28px 24px;
-      margin-bottom: 18px;
-      box-shadow: 0 4px 14px rgba(120, 90, 60, 0.08);
-    }
-
-    .card h2 {
-      color: #6b5544;
-      font-size: 19px;
-      border-left: 5px solid #d6ad78;
-      padding-left: 12px;
-      margin-bottom: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      font-size: 15px;
-      color: #5f5146;
-    }
-
-    label .required {
-      color: #c45c26;
-      margin-left: 2px;
-    }
-
-    label .hint {
-      font-weight: 400;
-      font-size: 13px;
-      color: #8b7a6b;
-    }
-
-    input[type="text"],
-    input[type="tel"],
-    input[type="number"],
-    input[type="date"],
-    select,
-    textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1.5px solid #dccdbb;
-      border-radius: 12px;
-      background: #fff;
-      font-size: 16px;
-      font-family: inherit;
-      color: #5f5146;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      outline: none;
-      border-color: #c99d68;
-      box-shadow: 0 0 0 3px rgba(201, 157, 104, 0.2);
-    }
-
-    input:invalid:not(:placeholder-shown),
-    select:invalid:not(:placeholder-shown) {
-      border-color: #e07a5f;
-    }
-
-    textarea {
-      min-height: 90px;
-      resize: vertical;
-    }
-
-    select {
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236b5544' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 36px;
-    }
-
-    .btn-submit {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 14px;
-      background: #c99d68;
-      color: #fff;
-      font-size: 18px;
-      font-weight: 700;
-      font-family: inherit;
-      cursor: pointer;
-      margin-top: 8px;
-      transition: background 0.2s, transform 0.15s;
-    }
-
-    .btn-submit:hover:not(:disabled) {
-      background: #b88a55;
-    }
-
-    .btn-submit:active:not(:disabled) {
-      transform: scale(0.98);
-    }
-
-    .btn-submit:disabled {
-      background: #c8b8a6;
-      cursor: not-allowed;
-    }
-
-    #message {
-      display: none;
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 12px;
-      text-align: center;
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    #message.success {
-      display: block;
-      background: #edf5e9;
-      color: #3d6b3a;
-      border: 1px solid #c5dfc0;
-    }
-
-    #message.error {
-      display: block;
-      background: #fdf0ee;
-      color: #a33a2c;
-      border: 1px solid #f0c4bc;
-    }
-
-    .footer {
-      text-align: center;
-      color: #8b7a6b;
-      font-size: 13px;
-      line-height: 1.8;
-      margin-top: 20px;
-      padding-bottom: 20px;
-    }
-
-    @media (max-width: 480px) {
-      .header h1 {
-        font-size: 22px;
-        padding-left: 50px;
-        padding-right: 10px;
+    /* Print Styles */
+    @media print {
+      body * {
+        visibility: hidden;
       }
-      .header-logo {
-        width: 48px;
-        height: 48px;
-        top: 12px;
-        left: 12px;
+      #printableReceipt, #printableReceipt * {
+        visibility: visible;
       }
-      .card {
-        padding: 22px 18px;
+      #printableReceipt {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        box-shadow: none;
+        border: 2px solid #ec4899;
+      }
+      .no-print {
+        display: none !important;
       }
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <div class="header">
-      <img class="header-logo" src="data:image/jpeg;base64,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" alt="六十三社區長照機構 Logo">
-      <h1>六十三社區長照機構</h1>
-      <p class="subtitle">日照機構參訪預約</p>
-      <p>歡迎家屬與長輩提前預約參觀，讓我們一起了解適合長輩的照顧服務。</p>
+<body class="text-slate-700 antialiased py-6 px-3 sm:px-6 relative overflow-x-hidden">
+
+  <!-- Floating Kawaii Elements (Background Decoration) -->
+  <div class="fixed top-10 left-5 text-pink-300/40 text-4xl pointer-events-none animate-pulse">🌸</div>
+  <div class="fixed top-28 right-8 text-pink-300/40 text-3xl pointer-events-none animate-bounce">💖</div>
+  <div class="fixed bottom-12 left-10 text-pink-300/40 text-4xl pointer-events-none animate-bounce">🧸</div>
+  <div class="fixed bottom-20 right-6 text-pink-300/40 text-3xl pointer-events-none animate-pulse">✨</div>
+
+  <!-- Kawaii Header Section -->
+  <header class="max-w-4xl mx-auto mb-6 text-center relative z-10">
+    <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white text-sakura-600 text-xs sm:text-sm font-black shadow-md mb-3 border-2 border-sakura-300 animate-bounce">
+      <span>🎀 參訪預約單 🌸</span>
+    </div>
+    <h1 class="text-2xl sm:text-4xl font-black text-sakura-700 tracking-tight flex items-center justify-center gap-2 flex-wrap">
+      <span>臺北市私立六十三社區長照機構</span>
+    </h1>
+    <p class="text-sm sm:text-base text-sakura-800 font-bold mt-1">
+      陪伴長輩度過暖心每一天 💖 歡迎預約親臨導覽體驗
+    </p>
+
+    <!-- Info Cards with Phone Link -->
+    <div class="mt-4 flex flex-wrap justify-center items-center gap-3 text-xs sm:text-sm">
+      <a href="tel:0223250630" class="flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-sakura-50 text-sakura-700 font-extrabold rounded-2xl shadow-sm border-2 border-sakura-300 btn-bounce">
+        <i class="fa-solid fa-phone text-sakura-500"></i>
+        <span>諮詢專線：(02) 2325-0630 (按此撥打)</span>
+      </a>
+      <div class="flex items-center gap-2 px-4 py-2.5 bg-white text-slate-700 rounded-2xl shadow-sm border-2 border-sakura-200 font-bold">
+        <i class="fa-regular fa-clock text-sakura-500"></i>
+        <span>服務時間：週一至週五 09:00 - 16:00</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Cute Tab Navigation -->
+  <nav class="max-w-4xl mx-auto sticky top-2 z-40 mb-5">
+    <div class="bg-white/95 backdrop-blur-md p-2 rounded-3xl shadow-lg border-2 border-sakura-300 flex items-center justify-between gap-1 overflow-x-auto no-scrollbar">
+      <a href="#section-intro" class="flex-1 min-w-[95px] text-center py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-black text-sakura-700 bg-sakura-100 border border-sakura-300 btn-bounce flex items-center justify-center gap-1">
+        <span>🌸</span> 機構簡介
+      </a>
+      <a href="#section-elder" class="flex-1 min-w-[95px] text-center py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-black text-slate-600 hover:bg-sakura-50 btn-bounce flex items-center justify-center gap-1">
+        <span>👴</span> 長輩資料
+      </a>
+      <a href="#section-family" class="flex-1 min-w-[115px] text-center py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-black text-slate-600 hover:bg-sakura-50 btn-bounce flex items-center justify-center gap-1">
+        <span>👨‍👩‍👧</span> 家屬與評估
+      </a>
+      <a href="#section-time" class="flex-1 min-w-[95px] text-center py-2.5 px-3 rounded-2xl text-xs sm:text-sm font-black text-slate-600 hover:bg-sakura-50 btn-bounce flex items-center justify-center gap-1">
+        <span>⏰</span> 時間選擇
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Kawaii Container Card -->
+  <main class="max-w-4xl mx-auto kawaii-card p-5 sm:p-8 md:p-10 relative">
+
+    <!-- Top Corner Ribbon Decoration -->
+    <div class="absolute -top-4 -right-3 bg-sakura-500 text-white font-black text-xs px-4 py-1.5 rounded-full shadow-md border-2 border-white transform rotate-6">
+      🎀 Kawaii Care 🌸
     </div>
 
-    <!-- ★★★ 把下面的 chen.xinyu0106@gmail.com 改成你自己的 Email ★★★ -->
-    <form 
-      id="reservationForm"
-      action="https://formsubmit.co/chen.xinyu0106@gmail.com"
-      method="POST"
-    >
-      <input type="hidden" name="_subject" value="【六十三社區長照】新參訪預約通知">
+    <!-- Form Object -->
+    <form id="bookingForm" action="https://formsubmit.co/chen.xinyu0106@gamil.com" method="POST" onsubmit="handleFormSubmit(event)">
+      <!-- FormSubmit Custom Settings -->
       <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="【可愛風參訪預約】臺北市私立六十三社區長照機構登記簿">
       <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://zqj07010413.github.io/Zqj07010413/?success=1">
-      <input type="text" name="_honey" style="display:none">
+      <input type="text" name="_honey" class="hidden" style="display:none !important">
 
-      <div class="card">
-        <h2>👴 長輩基本資料</h2>
+      <!-- Hidden Form Values -->
+      <input type="hidden" id="hidden_gender" name="長輩性別" value="爺爺 👴">
+      <input type="hidden" id="hidden_hobbies" name="長輩興趣愛好" value="">
+      <input type="hidden" id="hidden_relationship" name="與長輩關係" value="兒子">
+      <input type="hidden" id="hidden_1966" name="是否打過1966" value="是">
+      <input type="hidden" id="hidden_care_level" name="評估等級" value="尚未評估／不知道">
+      <input type="hidden" id="hidden_time_slots" name="預約參觀時段" value="">
 
-        <div class="form-group">
-          <label for="elderly_name">長輩姓名 <span class="required">*</span></label>
-          <input type="text" id="elderly_name" name="長輩姓名" required placeholder="請輸入長輩姓名">
+
+      <!-- 🌸 SECTION 0: 機構簡介 -->
+      <section id="section-intro" class="scroll-mt-24 mb-10 pb-8 border-b-2 border-dashed border-sakura-200">
+        <div class="bg-gradient-to-r from-sakura-100 via-pink-50 to-lavender-100 p-5 sm:p-6 rounded-3xl border-2 border-sakura-300 relative overflow-hidden shadow-sm">
+          <div class="absolute right-[-15px] bottom-[-15px] opacity-20 text-8xl pointer-events-none">🧸</div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-3 py-1 rounded-full bg-sakura-500 text-white font-black text-xs shadow-sm">🌸 歡迎光臨</span>
+            <span class="text-xs font-bold text-sakura-700">臺北市社會局立案機構</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-sakura-800">臺北市私立六十三社區長照機構</h2>
+          <p class="text-xs sm:text-sm text-slate-700 font-bold mt-2 leading-relaxed">
+            我們以像家一樣暖心的氛圍，陪伴長輩享受豐富的生活與完善的照顧。預約參訪當日將由專管師為您親切導覽環境、特色復能活動與長照補助試算 💕
+          </p>
+          <div class="mt-4 pt-3 border-t border-sakura-200 flex flex-wrap gap-4 text-xs font-bold text-sakura-800">
+            <span>📍 臺北市信義區基隆路二段63號</span>
+            <span>⏰ 週一至週五 09:00 - 16:00</span>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- 👴 SECTION 1: 長輩資料 -->
+      <section id="section-elder" class="scroll-mt-24 mb-10 pb-8 border-b-2 border-dashed border-sakura-200 space-y-6">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">👴</span>
+          <h2 class="text-xl font-black text-sakura-800">第一章：長輩可愛基本資料</h2>
+          <span class="text-xs font-black px-3 py-1 bg-sakura-100 text-sakura-700 rounded-full border border-sakura-300">1 / 3 頁</span>
         </div>
 
-        <div class="form-group">
-          <label for="elderly_gender">長輩性別 <span class="required">*</span></label>
-          <select id="elderly_gender" name="長輩性別" required>
-            <option value="">請選擇</option>
-            <option value="男">男</option>
-            <option value="女">女</option>
-          </select>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- 長輩姓名 -->
+          <div class="space-y-1.5">
+            <label class="block text-sm font-black text-slate-700">
+              長輩姓名 <span class="text-rose-500">*</span>
+            </label>
+            <input type="text" id="elderName" name="長輩姓名" placeholder="例如：陳大明" required
+              class="w-full px-4 py-3.5 rounded-2xl border-2 border-sakura-200 focus:border-sakura-500 focus:ring-4 focus:ring-sakura-100 outline-none transition bg-white text-slate-800 font-bold shadow-sm">
+            <p class="text-xs text-rose-500 font-bold hidden" id="err-elderName">請輸入長輩姓名喔 💕</p>
+          </div>
+
+          <!-- 性別 -->
+          <div class="space-y-1.5">
+            <label class="block text-sm font-black text-slate-700">
+              長輩性別 <span class="text-rose-500">*</span>
+            </label>
+            <div class="grid grid-cols-2 gap-3">
+              <button type="button" onclick="selectGender('爺爺 👴')" id="genderMale"
+                class="gender-btn active py-3 px-4 rounded-2xl border-2 border-sakura-500 bg-sakura-100 text-sakura-800 font-black transition flex items-center justify-center gap-2 btn-bounce shadow-sm">
+                <span>👴 爺爺</span>
+              </button>
+              <button type="button" onclick="selectGender('奶奶 👵')" id="genderFemale"
+                class="gender-btn py-3 px-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-600 font-black transition flex items-center justify-center gap-2 hover:border-sakura-300 btn-bounce">
+                <span>👵 奶奶</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 年齡 (預設 ≥65, 小於 65 出現粉紅泡泡提示) -->
+          <div class="space-y-1.5">
+            <label class="block text-sm font-black text-slate-700">
+              長輩年齡 <span class="text-rose-500">*</span>
+            </label>
+            <input type="number" id="elderAge" name="長輩年齡" min="1" max="120" placeholder="例如：78" required
+              class="w-full px-4 py-3.5 rounded-2xl border-2 border-sakura-200 focus:border-sakura-500 focus:ring-4 focus:ring-sakura-100 outline-none transition bg-white text-slate-800 font-bold shadow-sm"
+              oninput="checkAgeLogic()">
+            
+            <!-- 粉紅泡泡暖心提示 Banner -->
+            <div id="pinkAgeNotice" class="hidden p-3.5 rounded-2xl bg-sakura-100 border-2 border-sakura-300 text-sakura-800 text-xs font-bold flex items-start gap-2.5 mt-2 transition shadow-sm">
+              <span class="text-lg">💖</span>
+              <div>
+                <span class="font-black text-sakura-700">粉紅泡泡提示：</span>
+                依政府規定滿 65 歲以上可優先申請政府長照補助；若未滿 65 歲也非常歡迎蒞臨參訪與現場諮詢喔！
+              </div>
+            </div>
+            <p class="text-xs text-rose-500 font-bold hidden" id="err-elderAge">請輸入有效的年齡 💕</p>
+          </div>
+
+          <!-- 居住地方 (路段) - 限定中文與數字 -->
+          <div class="space-y-1.5">
+            <label class="block text-sm font-black text-slate-700">
+              居住地區 / 路段 <span class="text-rose-500">*</span>
+              <span class="text-xs font-bold text-sakura-600 ml-1">(限中文與數字)</span>
+            </label>
+            <input type="text" id="elderArea" name="居住地區路段" placeholder="例如：信義區基隆路二段" required
+              class="w-full px-4 py-3.5 rounded-2xl border-2 border-sakura-200 focus:border-sakura-500 focus:ring-4 focus:ring-sakura-100 outline-none transition bg-white text-slate-800 font-bold shadow-sm"
+              oninput="cleanAreaInput(this)">
+            <p class="text-xs text-rose-500 font-bold hidden" id="err-elderArea">請輸入居住地區與路段 (限制中文與數字)</p>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="elderly_age">長輩年齡 <span class="required">*</span> <span class="hint">（須 65 歲以上）</span></label>
-          <input type="number" id="elderly_age" name="長輩年齡" min="65" max="120" required placeholder="例如：78">
+        <!-- 興趣愛好 (快速可愛標籤) -->
+        <div class="space-y-2 pt-2">
+          <label class="block text-sm font-black text-slate-700">
+            長輩興趣愛好 <span class="text-xs text-slate-500 font-bold">(點選標籤自動帶入，可複選 🌸)</span>
+          </label>
+          <div class="flex flex-wrap gap-2.5" id="hobbyTagsContainer">
+            <button type="button" onclick="toggleHobbyTag(this, '🎤 唱歌')" class="hobby-tag px-4 py-2 rounded-2xl text-xs font-black border-2 border-slate-200 bg-white text-slate-700 hover:border-sakura-300 btn-bounce shadow-sm">
+              🎤 唱歌
+            </button>
+            <button type="button" onclick="toggleHobbyTag(this, '🪴 園藝')" class="hobby-tag px-4 py-2 rounded-2xl text-xs font-black border-2 border-slate-200 bg-white text-slate-700 hover:border-sakura-300 btn-bounce shadow-sm">
+              🪴 園藝
+            </button>
+            <button type="button" onclick="toggleHobbyTag(this, '🗣️ 聊天')" class="hobby-tag px-4 py-2 rounded-2xl text-xs font-black border-2 border-slate-200 bg-white text-slate-700 hover:border-sakura-300 btn-bounce shadow-sm">
+              🗣️ 聊天
+            </button>
+            <button type="button" onclick="toggleHobbyTag(this, '📺 看電視')" class="hobby-tag px-4 py-2 rounded-2xl text-xs font-black border-2 border-slate-200 bg-white text-slate-700 hover:border-sakura-300 btn-bounce shadow-sm">
+              📺 看電視
+            </button>
+            <button type="button" onclick="toggleHobbyTag(this, '🧘 氣功運動')" class="hobby-tag px-4 py-2 rounded-2xl text-xs font-black border-2 border-slate-200 bg-white text-slate-700 hover:border-sakura-300 btn-bounce shadow-sm">
+              🧘 氣功運動
+            </button>
+            <button type="button" onclick="toggleHobbyTag(this, '♟️ 下棋牌藝')" class="hobby-tag px-4 py-2 rounded-2xl text-xs font-black border-2 border-slate-200 bg-white text-slate-700 hover:border-sakura-300 btn-bounce shadow-sm">
+              ♟️ 下棋牌藝
+            </button>
+          </div>
+          <div class="flex gap-2 mt-3">
+            <input type="text" id="customHobby" placeholder="其他興趣，輸入後按新增" class="text-xs px-4 py-2.5 border-2 border-sakura-200 rounded-xl outline-none max-w-xs font-bold focus:border-sakura-500">
+            <button type="button" onclick="addCustomHobby()" class="px-4 py-2.5 bg-sakura-500 hover:bg-sakura-600 text-white text-xs font-black rounded-xl btn-bounce shadow-sm">
+              + 新增 🌸
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- 👨‍👩‍👧 SECTION 2: 家屬與評估 -->
+      <section id="section-family" class="scroll-mt-24 mb-10 pb-8 border-b-2 border-dashed border-sakura-200 space-y-6">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">👨‍👩‍👧</span>
+          <h2 class="text-xl font-black text-sakura-800">第二章：家屬聯絡與長照評估</h2>
+          <span class="text-xs font-black px-3 py-1 bg-sakura-100 text-sakura-700 rounded-full border border-sakura-300">2 / 3 頁</span>
         </div>
 
-        <div class="form-group">
-          <label for="elderly_area">目前主要居住地方（路段） <span class="required">*</span> <span class="hint">（僅限中文與數字）</span></label>
-          <input type="text" id="elderly_area" name="居住地方" required placeholder="例如：台北市大安區仁愛路" pattern="[\u4e00-\u9fff\u3400-\u4dbf0-9\s]+" title="只能輸入中文與數字">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- 家屬姓名 -->
+          <div class="space-y-1.5">
+            <label class="block text-sm font-black text-slate-700">
+              家屬 / 聯絡人姓名 <span class="text-rose-500">*</span>
+            </label>
+            <input type="text" id="familyName" name="家屬姓名" placeholder="例如：陳小明" required
+              class="w-full px-4 py-3.5 rounded-2xl border-2 border-sakura-200 focus:border-sakura-500 focus:ring-4 focus:ring-sakura-100 outline-none transition bg-white text-slate-800 font-bold shadow-sm">
+            <p class="text-xs text-rose-500 font-bold hidden" id="err-familyName">請輸入家屬姓名 💕</p>
+          </div>
+
+          <!-- 聯絡電話 (限制 10 位數字) -->
+          <div class="space-y-1.5">
+            <label class="block text-sm font-black text-slate-700">
+              聯絡電話 <span class="text-rose-500">*</span>
+              <span class="text-xs text-slate-500 font-bold">(10 位數，如 0912345678)</span>
+            </label>
+            <input type="tel" id="familyPhone" name="聯絡電話" placeholder="0912345678" maxlength="10" required
+              class="w-full px-4 py-3.5 rounded-2xl border-2 border-sakura-200 focus:border-sakura-500 focus:ring-4 focus:ring-sakura-100 outline-none transition bg-white text-slate-800 font-bold shadow-sm"
+              oninput="cleanPhoneInput(this)">
+            <p class="text-xs text-rose-500 font-bold hidden" id="err-familyPhone">請輸入正確 10 位數手機號碼 💕</p>
+          </div>
+
+          <!-- 電子郵件 Email (必填 + 格式驗證) -->
+          <div class="space-y-1.5 md:col-span-2">
+            <label class="block text-sm font-black text-slate-700">
+              電子郵件 Email <span class="text-rose-500">*</span>
+              <span class="text-xs text-sakura-600 font-bold">(接收預約確認信件)</span>
+            </label>
+            <input type="email" id="familyEmail" name="電子郵件Email" placeholder="example@email.com" required
+              class="w-full px-4 py-3.5 rounded-2xl border-2 border-sakura-200 focus:border-sakura-500 focus:ring-4 focus:ring-sakura-100 outline-none transition bg-white text-slate-800 font-bold shadow-sm"
+              oninput="validateEmailField()">
+            <p class="text-xs text-rose-500 font-bold hidden" id="err-familyEmail">請輸入正確格式 Email (需包含 @ 及網域)</p>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="elderly_hobbies">長輩的興趣愛好</label>
-          <textarea id="elderly_hobbies" name="興趣愛好" placeholder="例如：唱歌、聊天、散步、看電視……"></textarea>
+        <!-- 與長輩關係 -->
+        <div class="space-y-2">
+          <label class="block text-sm font-black text-slate-700">
+            與長輩關係 <span class="text-rose-500">*</span>
+          </label>
+          <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2" id="relContainer">
+            <button type="button" onclick="selectRel('兒子')" class="rel-btn active py-2.5 px-2 rounded-2xl border-2 border-sakura-500 bg-sakura-100 text-sakura-800 font-black text-xs sm:text-sm btn-bounce">兒子</button>
+            <button type="button" onclick="selectRel('女兒')" class="rel-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs sm:text-sm hover:border-sakura-300 btn-bounce">女兒</button>
+            <button type="button" onclick="selectRel('媳婦')" class="rel-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs sm:text-sm hover:border-sakura-300 btn-bounce">媳婦</button>
+            <button type="button" onclick="selectRel('女婿')" class="rel-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs sm:text-sm hover:border-sakura-300 btn-bounce">女婿</button>
+            <button type="button" onclick="selectRel('配偶')" class="rel-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs sm:text-sm hover:border-sakura-300 btn-bounce">配偶</button>
+            <button type="button" onclick="selectRel('孫子女')" class="rel-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs sm:text-sm hover:border-sakura-300 btn-bounce">孫子女</button>
+            <button type="button" onclick="selectRel('其他')" class="rel-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs sm:text-sm hover:border-sakura-300 btn-bounce">其他</button>
+          </div>
         </div>
+
+        <!-- 是否打過 1966 -->
+        <div class="space-y-2 pt-2">
+          <label class="block text-sm font-black text-slate-700">
+            是否曾撥打 1966 申請長照評估？ <span class="text-rose-500">*</span>
+          </label>
+          <div class="grid grid-cols-2 gap-4">
+            <button type="button" onclick="select1966('是')" id="btn1966Yes"
+              class="eval1966-btn active p-4 rounded-2xl border-2 border-sakura-500 bg-sakura-100 text-left transition flex items-center gap-3 btn-bounce shadow-sm">
+              <span class="w-6 h-6 rounded-full bg-sakura-500 text-white flex items-center justify-center text-xs font-black">✓</span>
+              <span class="font-black text-sakura-800 text-sm">是，已撥打過 1966 🌸</span>
+            </button>
+            <button type="button" onclick="select1966('否')" id="btn1966No"
+              class="eval1966-btn p-4 rounded-2xl border-2 border-slate-200 bg-white text-left transition flex items-center gap-3 hover:border-sakura-300 btn-bounce">
+              <span class="w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center text-xs text-transparent">✓</span>
+              <span class="font-black text-slate-600 text-sm">否，尚未撥打過 💭</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 長照評估等級 (尚未評估 & 第1~8級) -->
+        <div class="space-y-2 pt-2">
+          <label class="block text-sm font-black text-slate-700">
+            長照失能評估等級 <span class="text-rose-500">*</span>
+          </label>
+          <div class="grid grid-cols-3 sm:grid-cols-5 gap-2.5" id="careLevelContainer">
+            <button type="button" onclick="selectCareLevel('尚未評估／不知道')" class="care-btn active py-2.5 px-2 rounded-2xl border-2 border-sakura-500 bg-sakura-100 text-sakura-800 font-black text-xs btn-bounce">尚未評估／不知道</button>
+            <button type="button" onclick="selectCareLevel('第 1 級')" class="care-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs hover:border-sakura-300 btn-bounce">第 1 級</button>
+            <button type="button" onclick="selectCareLevel('第 2 級')" class="care-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs hover:border-sakura-300 btn-bounce">第 2 級</button>
+            <button type="button" onclick="selectCareLevel('第 3 級')" class="care-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs hover:border-sakura-300 btn-bounce">第 3 級</button>
+            <button type="button" onclick="selectCareLevel('第 4 級')" class="care-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs hover:border-sakura-300 btn-bounce">第 4 級</button>
+            <button type="button" onclick="selectCareLevel('第 5 級')" class="care-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs hover:border-sakura-300 btn-bounce">第 5 級</button>
+            <button type="button" onclick="selectCareLevel('第 6 級')" class="care-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs hover:border-sakura-300 btn-bounce">第 6 級</button>
+            <button type="button" onclick="selectCareLevel('第 7 級')" class="care-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs hover:border-sakura-300 btn-bounce">第 7 級</button>
+            <button type="button" onclick="selectCareLevel('第 8 級')" class="care-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs hover:border-sakura-300 btn-bounce">第 8 級</button>
+          </div>
+        </div>
+
+        <!-- 個管師與單位 (選填) -->
+        <div class="space-y-1.5 pt-2">
+          <label class="block text-sm font-black text-slate-700">
+            個管師姓名與服務單位 <span class="text-xs text-slate-400 font-bold">(選填)</span>
+          </label>
+          <input type="text" id="caseManager" name="個管師與單位" placeholder="例如：信義長照中心 王個管師"
+            class="w-full px-4 py-3.5 rounded-2xl border-2 border-sakura-200 focus:border-sakura-500 focus:ring-4 focus:ring-sakura-100 outline-none transition bg-white text-slate-800 font-bold shadow-sm">
+        </div>
+      </section>
+
+
+      <!-- ⏰ SECTION 3: 時間選擇 (可愛日曆 + 4時段多選) -->
+      <section id="section-time" class="scroll-mt-24 mb-6 space-y-6">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">⏰</span>
+          <h2 class="text-xl font-black text-sakura-800">第三章：預約參訪時間</h2>
+          <span class="text-xs font-black px-3 py-1 bg-sakura-100 text-sakura-700 rounded-full border border-sakura-300">3 / 3 頁</span>
+        </div>
+
+        <!-- 可愛日曆選擇器 (無快速按鈕) -->
+        <div class="space-y-2">
+          <label class="block text-sm font-black text-slate-700">
+            選擇參訪日期 <span class="text-rose-500">*</span>
+          </label>
+          <div class="max-w-xs">
+            <input type="date" id="visitDate" name="預約參觀日期" required
+              class="w-full px-4 py-3.5 rounded-2xl border-2 border-sakura-300 focus:border-sakura-500 focus:ring-4 focus:ring-sakura-100 outline-none transition bg-white text-slate-800 font-black shadow-sm cursor-pointer"
+              onchange="checkWeekendNotice()">
+          </div>
+
+          <!-- 週末提醒 Banner -->
+          <div id="weekendNotice" class="hidden p-3.5 rounded-2xl bg-vanilla-100 border-2 border-vanilla-200 text-amber-900 text-xs font-bold flex items-center gap-2 mt-2 shadow-sm">
+            <span class="text-base">🌼</span>
+            <span>您選擇了週末例假日，平日提供常態導覽；假日參訪將由值班專員特別為您接待導覽！</span>
+          </div>
+          <p class="text-xs text-rose-500 font-bold hidden" id="err-visitDate">請選擇有效的預約日期 💕</p>
+        </div>
+
+        <!-- 4 個時段膠囊按鈕 (複選 1~4 個) -->
+        <div class="space-y-3 pt-2">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <label class="block text-sm font-black text-slate-700">
+              選擇參觀時段 <span class="text-rose-500">*</span>
+              <span class="text-xs text-sakura-600 font-bold ml-1">(可複選 1 ~ 4 個時段 💕)</span>
+            </label>
+            <!-- 甜美動態計數徽章 -->
+            <span id="slotCountBadge" class="px-3.5 py-1 rounded-full bg-sakura-500 text-white font-black text-xs shadow-sm">
+              已選擇 0 / 4 個時段 💕
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="timeSlotsGrid">
+            <!-- Slot 1 -->
+            <button type="button" onclick="toggleTimeSlot(this, '09:00 - 10:00 (上午)')" data-slot="09:00 - 10:00 (上午)"
+              class="slot-btn p-4 rounded-2xl border-2 border-slate-200 bg-white hover:border-sakura-300 text-left transition flex items-center justify-between btn-bounce shadow-sm">
+              <div>
+                <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-sakura-100 text-sakura-700">上午場 A 🌸</span>
+                <div class="text-lg font-black text-slate-800 mt-1">09:00 - 10:00</div>
+                <div class="text-xs text-slate-500 font-bold">環境設施導覽與健康評估</div>
+              </div>
+              <div class="slot-check w-7 h-7 rounded-full border-2 border-slate-300 flex items-center justify-center text-xs text-transparent transition">✓</div>
+            </button>
+
+            <!-- Slot 2 -->
+            <button type="button" onclick="toggleTimeSlot(this, '10:00 - 11:00 (上午)')" data-slot="10:00 - 11:00 (上午)"
+              class="slot-btn p-4 rounded-2xl border-2 border-slate-200 bg-white hover:border-sakura-300 text-left transition flex items-center justify-between btn-bounce shadow-sm">
+              <div>
+                <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-sakura-100 text-sakura-700">上午場 B 🌿</span>
+                <div class="text-lg font-black text-slate-800 mt-1">10:00 - 11:00</div>
+                <div class="text-xs text-slate-500 font-bold">課程觀摩與團體活動體驗</div>
+              </div>
+              <div class="slot-check w-7 h-7 rounded-full border-2 border-slate-300 flex items-center justify-center text-xs text-transparent transition">✓</div>
+            </button>
+
+            <!-- Slot 3 -->
+            <button type="button" onclick="toggleTimeSlot(this, '14:00 - 15:00 (下午)')" data-slot="14:00 - 15:00 (下午)"
+              class="slot-btn p-4 rounded-2xl border-2 border-slate-200 bg-white hover:border-sakura-300 text-left transition flex items-center justify-between btn-bounce shadow-sm">
+              <div>
+                <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-lavender-100 text-purple-700">下午場 A 🍰</span>
+                <div class="text-lg font-black text-slate-800 mt-1">14:00 - 15:00</div>
+                <div class="text-xs text-slate-500 font-bold">下午茶體驗與復能運動展示</div>
+              </div>
+              <div class="slot-check w-7 h-7 rounded-full border-2 border-slate-300 flex items-center justify-center text-xs text-transparent transition">✓</div>
+            </button>
+
+            <!-- Slot 4 -->
+            <button type="button" onclick="toggleTimeSlot(this, '15:00 - 16:00 (下午)')" data-slot="15:00 - 16:00 (下午)"
+              class="slot-btn p-4 rounded-2xl border-2 border-slate-200 bg-white hover:border-sakura-300 text-left transition flex items-center justify-between btn-bounce shadow-sm">
+              <div>
+                <span class="text-xs font-black px-2.5 py-0.5 rounded-full bg-lavender-100 text-purple-700">下午場 B 💡</span>
+                <div class="text-lg font-black text-slate-800 mt-1">15:00 - 16:00</div>
+                <div class="text-xs text-slate-500 font-bold">補助試算與個案深度諮詢</div>
+              </div>
+              <div class="slot-check w-7 h-7 rounded-full border-2 border-slate-300 flex items-center justify-center text-xs text-transparent transition">✓</div>
+            </button>
+          </div>
+          <p class="text-xs text-rose-500 font-bold hidden" id="err-timeSlots">請至少選取 1 個參觀時段 💕</p>
+        </div>
+      </section>
+
+
+      <!-- SUBMIT BUTTON -->
+      <div class="pt-6 border-t-2 border-dashed border-sakura-200 text-center">
+        <button type="submit" class="w-full sm:w-auto px-10 py-4 rounded-full bg-gradient-to-r from-sakura-500 via-pink-500 to-sakura-600 hover:from-sakura-600 hover:to-sakura-500 text-white font-black text-base sm:text-lg shadow-xl shadow-sakura-500/30 transition btn-bounce flex items-center justify-center gap-2 mx-auto">
+          <span>產生預約單 💕</span>
+        </button>
+        <p class="text-xs text-slate-500 font-bold mt-2">點擊後將產出預約憑證單，檢視無誤即可送出 🌸</p>
       </div>
 
-      <div class="card">
-        <h2>👨‍👩‍👧 家屬資料</h2>
-
-        <div class="form-group">
-          <label for="family_name">家屬姓名 <span class="required">*</span></label>
-          <input type="text" id="family_name" name="家屬姓名" required placeholder="請輸入家屬姓名">
-        </div>
-
-        <div class="form-group">
-          <label for="family_phone">家屬電話 <span class="required">*</span> <span class="hint">（須為 10 位數字）</span></label>
-          <input type="tel" id="family_phone" name="家屬電話" required placeholder="例如：0912345678" pattern="[0-9]{10}" maxlength="10" title="請輸入 10 位數字">
-        </div>
-
-        <div class="form-group">
-          <label for="relationship">和長輩的關係 <span class="required">*</span></label>
-          <select id="relationship" name="關係" required>
-            <option value="">請選擇</option>
-            <option value="兒子">兒子</option>
-            <option value="女兒">女兒</option>
-            <option value="媳婦">媳婦</option>
-            <option value="女婿">女婿</option>
-            <option value="配偶">配偶</option>
-            <option value="孫子女">孫子女</option>
-            <option value="其他">其他</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>📋 長照評估資料</h2>
-
-        <div class="form-group">
-          <label for="assessment_1966">是否有打 1966 做評估過 <span class="required">*</span></label>
-          <select id="assessment_1966" name="是否評估1966" required>
-            <option value="">請選擇</option>
-            <option value="是">是</option>
-            <option value="否">否</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="assessment_level">評估後等級是幾級</label>
-          <select id="assessment_level" name="評估等級">
-            <option value="">尚未評估／不知道</option>
-            <option value="第2級">第2級</option>
-            <option value="第3級">第3級</option>
-            <option value="第4級">第4級</option>
-            <option value="第5級">第5級</option>
-            <option value="第6級">第6級</option>
-            <option value="第7級">第7級</option>
-            <option value="第8級">第8級</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="case_manager_unit">個管師單位</label>
-          <input type="text" id="case_manager_unit" name="個管師單位" placeholder="若沒有可留白">
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>📅 參訪預約</h2>
-
-        <div class="form-group">
-          <label for="visit_date">想預約日期 <span class="required">*</span></label>
-          <input type="date" id="visit_date" name="預約日期" required>
-        </div>
-
-        <div class="form-group">
-          <label for="visit_time">方便參觀時間 <span class="required">*</span></label>
-          <select id="visit_time" name="參觀時間" required>
-            <option value="">請選擇</option>
-            <option value="上午">上午</option>
-            <option value="下午">下午</option>
-          </select>
-        </div>
-
-        <button type="submit" class="btn-submit" id="submitButton">送出參訪預約</button>
-        <div id="message"></div>
-      </div>
     </form>
+  </main>
 
-    <div class="footer">
-      台北市私立六十三社區長照機構（日照機構）<br>
-      感謝您填寫參訪預約，我們會再與您聯繫。
+
+  <!-- 日系甜美拍立得風 參訪預約憑證 MODAL -->
+  <div id="receiptModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="polaroid-card max-w-lg w-full p-6 sm:p-8 relative my-auto border-4 border-sakura-300">
+      
+      <!-- Top Decorative Washi Tape -->
+      <div class="polaroid-tape"></div>
+
+      <!-- Modal Close Button -->
+      <button type="button" onclick="closeReceiptModal()" class="absolute right-4 top-4 w-9 h-9 rounded-full bg-sakura-100 text-sakura-600 hover:bg-sakura-200 flex items-center justify-center font-black no-print transition">
+        ✕
+      </button>
+
+      <!-- Printable Polaroid Voucher Content -->
+      <div id="printableReceipt" class="space-y-4 pt-2">
+
+        <!-- Header Stamp & Title -->
+        <div class="bg-gradient-to-r from-sakura-100 to-pink-100 p-4 rounded-2xl border-2 border-sakura-300 text-center relative overflow-hidden">
+          <div class="text-xs font-black text-sakura-600 uppercase tracking-wider">臺北市私立六十三社區長照機構</div>
+          <h2 class="text-2xl font-black text-sakura-800 mt-1">參訪預約存根聯 🌸</h2>
+          <div class="inline-block mt-2 px-3 py-1 bg-white text-sakura-700 rounded-full text-xs font-mono font-black border border-sakura-300" id="receiptNumber">
+            NO-63-20261024-8888
+          </div>
+        </div>
+
+        <!-- Receipt Summary List -->
+        <div class="bg-sakura-50/60 p-4 rounded-2xl border-2 border-sakura-100 text-xs sm:text-sm space-y-2.5 font-bold">
+          <div class="flex justify-between pb-2 border-b border-sakura-200">
+            <span class="text-slate-500">預約參訪日期</span>
+            <span class="font-black text-sakura-800" id="sumDate">-</span>
+          </div>
+          <div class="flex justify-between pb-2 border-b border-sakura-200">
+            <span class="text-slate-500">選取時段 (共 <span id="sumSlotCount">0</span> 個)</span>
+            <span class="font-black text-sakura-800 text-right max-w-[200px]" id="sumSlots">-</span>
+          </div>
+          <div class="flex justify-between pb-2 border-b border-sakura-200">
+            <span class="text-slate-500">長輩姓名 / 性別 / 年齡</span>
+            <span class="font-bold text-slate-800" id="sumElder">-</span>
+          </div>
+          <div class="flex justify-between pb-2 border-b border-sakura-200">
+            <span class="text-slate-500">居住地區/路段</span>
+            <span class="font-bold text-slate-800" id="sumArea">-</span>
+          </div>
+          <div class="flex justify-between pb-2 border-b border-sakura-200">
+            <span class="text-slate-500">長輩興趣愛好</span>
+            <span class="font-bold text-slate-800 max-w-[180px] text-right truncate" id="sumHobbies">無</span>
+          </div>
+          <div class="flex justify-between pb-2 border-b border-sakura-200">
+            <span class="text-slate-500">家屬姓名 / 關係</span>
+            <span class="font-bold text-slate-800" id="sumFamily">-</span>
+          </div>
+          <div class="flex justify-between pb-2 border-b border-sakura-200">
+            <span class="text-slate-500">聯絡電話</span>
+            <span class="font-bold text-slate-800" id="sumPhone">-</span>
+          </div>
+          <div class="flex justify-between pb-2 border-b border-sakura-200">
+            <span class="text-slate-500">通知 Email</span>
+            <span class="font-bold text-slate-800" id="sumEmail">-</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">1966 評估 / 等級</span>
+            <span class="font-bold text-slate-800" id="sumCare">-</span>
+          </div>
+        </div>
+
+        <div class="text-xs text-sakura-800 bg-vanilla-100 p-3 rounded-2xl border border-vanilla-200 font-bold">
+          💡 參訪當天請攜帶長輩身分證或健保卡，專官師將親自為您說明環境與試算補助！
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="mt-5 space-y-2.5 no-print">
+        <div class="grid grid-cols-2 gap-2">
+          <button type="button" onclick="copyReceiptSummary()" class="py-3 px-3 rounded-2xl border-2 border-sakura-400 text-sakura-700 font-black text-xs sm:text-sm hover:bg-sakura-50 transition btn-bounce flex items-center justify-center gap-1">
+            <i class="fa-regular fa-copy"></i> 複製預約摘要
+          </button>
+          <button type="button" onclick="window.print()" class="py-3 px-3 rounded-2xl bg-sakura-100 border-2 border-sakura-300 text-sakura-800 font-black text-xs sm:text-sm transition btn-bounce flex items-center justify-center gap-1">
+            <i class="fa-solid fa-print"></i> 列印 / 存為 PDF
+          </button>
+        </div>
+
+        <button type="button" onclick="confirmAndSubmitForm()" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-sakura-500 to-sakura-600 hover:from-sakura-600 hover:to-sakura-500 text-white font-black text-sm shadow-md transition btn-bounce flex items-center justify-center gap-2">
+          <span>正式送出參訪預約單 🌸</span>
+        </button>
+      </div>
+
+      <!-- Toast Feedback -->
+      <div id="toastMessage" class="hidden absolute top-4 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs px-4 py-2 rounded-full shadow-lg z-50 font-bold">
+        已複製預約摘要！
+      </div>
+
     </div>
   </div>
 
-  <script>
-    // 日期最小值為今天
-    const dateInput = document.getElementById("visit_date");
-    const today = new Date().toISOString().split("T")[0];
-    dateInput.setAttribute("min", today);
 
-    // 成功訊息
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get("success") === "1") {
-      const message = document.getElementById("message");
-      message.className = "success";
-      message.textContent = "✅ 預約資料已成功送出！我們會再與您聯繫。";
-      window.history.replaceState({}, document.title, window.location.pathname);
+  <!-- Application Logic JavaScript -->
+  <script>
+    // State management
+    let selectedGender = '爺爺 👴';
+    let selectedHobbies = [];
+    let selectedRelationship = '兒子';
+    let selected1966 = '是';
+    let selectedCareLevel = '尚未評估／不知道';
+    let selectedTimeSlots = [];
+
+    // Initialize minimum date to Today
+    window.addEventListener('DOMContentLoaded', () => {
+      const todayStr = new Date().toISOString().split('T')[0];
+      const dateInput = document.getElementById('visitDate');
+      if (dateInput) {
+        dateInput.min = todayStr;
+        dateInput.value = todayStr;
+      }
+    });
+
+    // Gender Selection
+    function selectGender(gender) {
+      selectedGender = gender;
+      document.getElementById('hidden_gender').value = gender;
+
+      const maleBtn = document.getElementById('genderMale');
+      const femaleBtn = document.getElementById('genderFemale');
+
+      if (gender.includes('爺爺')) {
+        maleBtn.className = 'gender-btn active py-3 px-4 rounded-2xl border-2 border-sakura-500 bg-sakura-100 text-sakura-800 font-black transition flex items-center justify-center gap-2 btn-bounce shadow-sm';
+        femaleBtn.className = 'gender-btn py-3 px-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-600 font-black transition flex items-center justify-center gap-2 hover:border-sakura-300 btn-bounce';
+      } else {
+        femaleBtn.className = 'gender-btn active py-3 px-4 rounded-2xl border-2 border-sakura-500 bg-sakura-100 text-sakura-800 font-black transition flex items-center justify-center gap-2 btn-bounce shadow-sm';
+        maleBtn.className = 'gender-btn py-3 px-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-600 font-black transition flex items-center justify-center gap-2 hover:border-sakura-300 btn-bounce';
+      }
     }
 
-    // 居住地方：只允許中文與數字（相容電腦中文輸入法）
-    const areaInput = document.getElementById("elderly_area");
-    let areaComposing = false;
-    areaInput.addEventListener("compositionstart", function () {
-      areaComposing = true;
-    });
-    areaInput.addEventListener("compositionend", function () {
-      areaComposing = false;
-      this.value = this.value.replace(/[^\u4e00-\u9fff\u3400-\u4dbf0-9\s]/g, "");
-    });
-    areaInput.addEventListener("input", function () {
-      if (!areaComposing) {
-        this.value = this.value.replace(/[^\u4e00-\u9fff\u3400-\u4dbf0-9\s]/g, "");
-      }
-    });
+    // Age Logic Check (<65 triggers Pink Bubble)
+    function checkAgeLogic() {
+      const ageVal = parseInt(document.getElementById('elderAge').value, 10);
+      const pinkNotice = document.getElementById('pinkAgeNotice');
+      const errAge = document.getElementById('err-elderAge');
 
-    // 家屬電話：只允許數字，最多 10 位
-    const phoneInput = document.getElementById("family_phone");
-    phoneInput.addEventListener("input", function () {
-      this.value = this.value.replace(/[^0-9]/g, "").slice(0, 10);
-    });
-
-    // 年齡驗證提示
-    const ageInput = document.getElementById("elderly_age");
-    ageInput.addEventListener("input", function () {
-      if (this.value && Number(this.value) < 65) {
-        this.setCustomValidity("長輩年齡須為 65 歲以上");
+      if (!isNaN(ageVal) && ageVal > 0) {
+        errAge.classList.add('hidden');
+        if (ageVal < 65) {
+          pinkNotice.classList.remove('hidden');
+        } else {
+          pinkNotice.classList.add('hidden');
+        }
       } else {
-        this.setCustomValidity("");
+        pinkNotice.classList.add('hidden');
       }
-    });
+    }
 
-    const form = document.getElementById("reservationForm");
-    const button = document.getElementById("submitButton");
+    // Clean Area Input (Chinese & Digits ONLY)
+    function cleanAreaInput(input) {
+      input.value = input.value.replace(/[^\u4e00-\u9fa50-9]/g, '');
+      const err = document.getElementById('err-elderArea');
+      if (input.value.trim().length > 0) {
+        err.classList.add('hidden');
+      }
+    }
 
-    form.addEventListener("submit", function () {
-      button.disabled = true;
-      button.textContent = "資料送出中……";
-    });
+    // Clean Phone Input (10 Digits ONLY)
+    function cleanPhoneInput(input) {
+      input.value = input.value.replace(/\D/g, '').slice(0, 10);
+      const err = document.getElementById('err-familyPhone');
+      if (input.value.length === 10) {
+        err.classList.add('hidden');
+      }
+    }
+
+    // Email Format Validation
+    function validateEmailField() {
+      const emailInput = document.getElementById('familyEmail');
+      const err = document.getElementById('err-familyEmail');
+      const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (pattern.test(emailInput.value.trim())) {
+        err.classList.add('hidden');
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    // Hobby Tags Toggle Logic
+    function toggleHobbyTag(btn, hobbyName) {
+      if (selectedHobbies.includes(hobbyName)) {
+        selectedHobbies = selectedHobbies.filter(h => h !== hobbyName);
+        btn.classList.remove('border-sakura-500', 'bg-sakura-100', 'text-sakura-800');
+        btn.classList.add('border-slate-200', 'bg-white', 'text-slate-700');
+      } else {
+        selectedHobbies.push(hobbyName);
+        btn.classList.remove('border-slate-200', 'bg-white', 'text-slate-700');
+        btn.classList.add('border-sakura-500', 'bg-sakura-100', 'text-sakura-800');
+      }
+      document.getElementById('hidden_hobbies').value = selectedHobbies.join(', ');
+    }
+
+    // Add Custom Hobby
+    function addCustomHobby() {
+      const input = document.getElementById('customHobby');
+      const val = input.value.trim();
+      if (!val) return;
+
+      const newHobby = `🌸 ${val}`;
+      if (!selectedHobbies.includes(newHobby)) {
+        selectedHobbies.push(newHobby);
+
+        const container = document.getElementById('hobbyTagsContainer');
+        const newBtn = document.createElement('button');
+        newBtn.type = 'button';
+        newBtn.onclick = function() { toggleHobbyTag(this, newHobby); };
+        newBtn.className = 'hobby-tag px-4 py-2 rounded-2xl text-xs font-black border-2 border-sakura-500 bg-sakura-100 text-sakura-800 btn-bounce shadow-sm';
+        newBtn.innerText = newHobby;
+        container.appendChild(newBtn);
+
+        document.getElementById('hidden_hobbies').value = selectedHobbies.join(', ');
+      }
+      input.value = '';
+    }
+
+    // Relationship Selector
+    function selectRel(rel) {
+      selectedRelationship = rel;
+      document.getElementById('hidden_relationship').value = rel;
+
+      const buttons = document.querySelectorAll('.rel-btn');
+      buttons.forEach(btn => {
+        if (btn.innerText.trim() === rel) {
+          btn.className = 'rel-btn active py-2.5 px-2 rounded-2xl border-2 border-sakura-500 bg-sakura-100 text-sakura-800 font-black text-xs sm:text-sm btn-bounce';
+        } else {
+          btn.className = 'rel-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs sm:text-sm hover:border-sakura-300 btn-bounce';
+        }
+      });
+    }
+
+    // 1966 Selector
+    function select1966(val) {
+      selected1966 = val;
+      document.getElementById('hidden_1966').value = val;
+
+      const yesBtn = document.getElementById('btn1966Yes');
+      const noBtn = document.getElementById('btn1966No');
+
+      if (val === '是') {
+        yesBtn.className = 'eval1966-btn active p-4 rounded-2xl border-2 border-sakura-500 bg-sakura-100 text-left transition flex items-center gap-3 btn-bounce shadow-sm';
+        yesBtn.querySelector('span').className = 'w-6 h-6 rounded-full bg-sakura-500 text-white flex items-center justify-center text-xs font-black';
+        noBtn.className = 'eval1966-btn p-4 rounded-2xl border-2 border-slate-200 bg-white text-left transition flex items-center gap-3 hover:border-sakura-300 btn-bounce';
+        noBtn.querySelector('span').className = 'w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center text-xs text-transparent';
+      } else {
+        noBtn.className = 'eval1966-btn active p-4 rounded-2xl border-2 border-sakura-500 bg-sakura-100 text-left transition flex items-center gap-3 btn-bounce shadow-sm';
+        noBtn.querySelector('span').className = 'w-6 h-6 rounded-full bg-sakura-500 text-white flex items-center justify-center text-xs font-black';
+        yesBtn.className = 'eval1966-btn p-4 rounded-2xl border-2 border-slate-200 bg-white text-left transition flex items-center gap-3 hover:border-sakura-300 btn-bounce';
+        yesBtn.querySelector('span').className = 'w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center text-xs text-transparent';
+      }
+    }
+
+    // Care Level Selector
+    function selectCareLevel(lvl) {
+      selectedCareLevel = lvl;
+      document.getElementById('hidden_care_level').value = lvl;
+
+      const buttons = document.querySelectorAll('.care-btn');
+      buttons.forEach(btn => {
+        if (btn.innerText.trim() === lvl) {
+          btn.className = 'care-btn active py-2.5 px-2 rounded-2xl border-2 border-sakura-500 bg-sakura-100 text-sakura-800 font-black text-xs btn-bounce';
+        } else {
+          btn.className = 'care-btn py-2.5 px-2 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-black text-xs hover:border-sakura-300 btn-bounce';
+        }
+      });
+    }
+
+    // Weekend Notice Check
+    function checkWeekendNotice() {
+      const dateVal = document.getElementById('visitDate').value;
+      const notice = document.getElementById('weekendNotice');
+      if (!dateVal) return;
+
+      const day = new Date(dateVal).getDay();
+      if (day === 0 || day === 6) {
+        notice.classList.remove('hidden');
+      } else {
+        notice.classList.add('hidden');
+      }
+      document.getElementById('err-visitDate').classList.add('hidden');
+    }
+
+    // Multi-select Time Slots Logic (1 to 4 Slots)
+    function toggleTimeSlot(btn, slotText) {
+      const checkMark = btn.querySelector('.slot-check');
+
+      if (selectedTimeSlots.includes(slotText)) {
+        selectedTimeSlots = selectedTimeSlots.filter(s => s !== slotText);
+        btn.className = 'slot-btn p-4 rounded-2xl border-2 border-slate-200 bg-white hover:border-sakura-300 text-left transition flex items-center justify-between btn-bounce shadow-sm';
+        checkMark.className = 'slot-check w-7 h-7 rounded-full border-2 border-slate-300 flex items-center justify-center text-xs text-transparent transition';
+      } else {
+        if (selectedTimeSlots.length >= 4) {
+          showToast('最多可選取 4 個時段喔 💕');
+          return;
+        }
+        selectedTimeSlots.push(slotText);
+        btn.className = 'slot-btn p-4 rounded-2xl border-2 border-sakura-500 bg-sakura-100 text-left transition flex items-center justify-between btn-bounce shadow-sm';
+        checkMark.className = 'slot-check w-7 h-7 rounded-full bg-sakura-500 text-white flex items-center justify-center text-xs transition font-black';
+      }
+
+      document.getElementById('slotCountBadge').innerText = `已選擇 ${selectedTimeSlots.length} / 4 個時段 💕`;
+      document.getElementById('hidden_time_slots').value = selectedTimeSlots.join('；');
+
+      if (selectedTimeSlots.length > 0) {
+        document.getElementById('err-timeSlots').classList.add('hidden');
+      }
+    }
+
+    // Form Validation
+    function validateFullForm() {
+      let isValid = true;
+
+      // 1. Elder Name
+      const elderName = document.getElementById('elderName').value.trim();
+      const errElderName = document.getElementById('err-elderName');
+      if (!elderName) {
+        errElderName.classList.remove('hidden');
+        isValid = false;
+      } else {
+        errElderName.classList.add('hidden');
+      }
+
+      // 2. Elder Age
+      const elderAge = parseInt(document.getElementById('elderAge').value, 10);
+      const errElderAge = document.getElementById('err-elderAge');
+      if (isNaN(elderAge) || elderAge <= 0) {
+        errElderAge.classList.remove('hidden');
+        isValid = false;
+      } else {
+        errElderAge.classList.add('hidden');
+      }
+
+      // 3. Living Area
+      const elderArea = document.getElementById('elderArea').value.trim();
+      const errElderArea = document.getElementById('err-elderArea');
+      if (!elderArea) {
+        errElderArea.classList.remove('hidden');
+        isValid = false;
+      } else {
+        errElderArea.classList.add('hidden');
+      }
+
+      // 4. Family Name
+      const familyName = document.getElementById('familyName').value.trim();
+      const errFamilyName = document.getElementById('err-familyName');
+      if (!familyName) {
+        errFamilyName.classList.remove('hidden');
+        isValid = false;
+      } else {
+        errFamilyName.classList.add('hidden');
+      }
+
+      // 5. Phone
+      const familyPhone = document.getElementById('familyPhone').value.trim();
+      const errFamilyPhone = document.getElementById('err-familyPhone');
+      if (familyPhone.length !== 10) {
+        errFamilyPhone.classList.remove('hidden');
+        isValid = false;
+      } else {
+        errFamilyPhone.classList.add('hidden');
+      }
+
+      // 6. Email validation
+      const isEmailValid = validateEmailField();
+      if (!isEmailValid) {
+        document.getElementById('err-familyEmail').classList.remove('hidden');
+        isValid = false;
+      }
+
+      // 7. Visit Date
+      const visitDate = document.getElementById('visitDate').value;
+      const errVisitDate = document.getElementById('err-visitDate');
+      if (!visitDate) {
+        errVisitDate.classList.remove('hidden');
+        isValid = false;
+      } else {
+        errVisitDate.classList.add('hidden');
+      }
+
+      // 8. Time Slots
+      const errTimeSlots = document.getElementById('err-timeSlots');
+      if (selectedTimeSlots.length === 0) {
+        errTimeSlots.classList.remove('hidden');
+        isValid = false;
+      } else {
+        errTimeSlots.classList.add('hidden');
+      }
+
+      return isValid;
+    }
+
+    // Form Submit Intercept & Polaroid Modal
+    function handleFormSubmit(e) {
+      e.preventDefault();
+
+      if (!validateFullForm()) {
+        showToast('請正確填寫標記 * 之必填欄位喔 💕');
+        return;
+      }
+
+      // Unique Receipt Number: NO-63-YYYYMMDD-XXXX
+      const d = new Date();
+      const dateStr = d.getFullYear() + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0');
+      const randomNum = Math.floor(1000 + Math.random() * 9000);
+      document.getElementById('receiptNumber').innerText = `NO-63-${dateStr}-${randomNum}`;
+
+      // Populate Summary
+      document.getElementById('sumDate').innerText = document.getElementById('visitDate').value;
+      document.getElementById('sumSlotCount').innerText = selectedTimeSlots.length;
+      document.getElementById('sumSlots').innerText = selectedTimeSlots.join(' / ');
+      document.getElementById('sumElder').innerText = `${document.getElementById('elderName').value} (${selectedGender}，${document.getElementById('elderAge').value} 歲)`;
+      document.getElementById('sumArea').innerText = document.getElementById('elderArea').value;
+      document.getElementById('sumHobbies').innerText = selectedHobbies.length > 0 ? selectedHobbies.join(', ') : '無特別指定';
+      document.getElementById('sumFamily').innerText = `${document.getElementById('familyName').value} (${selectedRelationship})`;
+      document.getElementById('sumPhone').innerText = document.getElementById('familyPhone').value;
+      document.getElementById('sumEmail').innerText = document.getElementById('familyEmail').value;
+      document.getElementById('sumCare').innerText = `1966：${selected1966} / 等級：${selectedCareLevel}`;
+
+      // Show Modal
+      document.getElementById('receiptModal').classList.remove('hidden');
+    }
+
+    function closeReceiptModal() {
+      document.getElementById('receiptModal').classList.add('hidden');
+    }
+
+    function confirmAndSubmitForm() {
+      document.getElementById('bookingForm').submit();
+    }
+
+    // Copy Summary Text
+    function copyReceiptSummary() {
+      const summaryText = `【臺北市私立六十三社區長照機構 - 參訪預約單 🌸】
+------------------------------------------
+預約單號：${document.getElementById('receiptNumber').innerText}
+預約日期：${document.getElementById('visitDate').value}
+選取時段：${selectedTimeSlots.join(' / ')}
+長輩資料：${document.getElementById('elderName').value} (${selectedGender}，${document.getElementById('elderAge').value}歲)
+居住地區：${document.getElementById('elderArea').value}
+長輩興趣：${selectedHobbies.length > 0 ? selectedHobbies.join(', ') : '無'}
+聯絡家屬：${document.getElementById('familyName').value} (${selectedRelationship})
+聯絡電話：${document.getElementById('familyPhone').value}
+通知信箱：${document.getElementById('familyEmail').value}
+1966狀態：${selected1966} (評估等級：${selectedCareLevel})
+------------------------------------------
+諮詢專線：(02) 2325-0630
+機構地址：臺北市信義區基隆路二段63號`;
+
+      const textarea = document.createElement('textarea');
+      textarea.value = summaryText;
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      try {
+        document.execCommand('copy');
+        showToast('已複製預約摘要到剪貼簿囉 💕');
+      } catch (err) {
+        showToast('複製失敗，請手動複製');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastMessage');
+      toast.innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3000);
+    }
   </script>
 </body>
 </html>
